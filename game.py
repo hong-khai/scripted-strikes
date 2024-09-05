@@ -1,7 +1,6 @@
 import threading
 import random
 import time
-import sys
 from typing import Dict, List, Union
 
 class Game:
