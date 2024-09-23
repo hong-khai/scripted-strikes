@@ -587,7 +587,7 @@ b) No""")
     def start_game(self) -> None:
         if self.completed_intro == False:
             self.completed_intro: bool = True
-            new_status = input("Are you new?")
+            new_status = input("Are you new? (yes or no) ")
             if new_status == "yes":
                 self.game_intro()
 
