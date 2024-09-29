@@ -379,9 +379,8 @@ Do you want to defend or offend?""")
             print("You do not have enough money!")
             return
 
-        filtered_vehicle_type: str = vehicle_type
-        if vehicle_type == "fighter jet": filtered_vehicle_type: str = "fighter_jet"
-        if vehicle_type == "naval cruiser": filtered_vehicle_type: str = "naval_cruiser"
+        if vehicle_type in ["fighter jet", "naval cruiser"]: 
+            filtered_vehicle_type: str = vehicle_type.replace(" ", "_")
 
         current_count = getattr(self, filtered_vehicle_type + 's')
         setattr(self, filtered_vehicle_type + 's', current_count + number_needed)
@@ -576,13 +575,13 @@ b) Save game in file""")
                 print("""You already have a saved game. Do you want to overwrite it?
 a) Yes
 b) No""")
-        overwrite_saved = input("You already have a saved game. Do you want to overwrite it?").strip().lower()
-        if overwrite_saved == "a":
-            self.write_game_key()
-        elif overwrite_saved == "b":
-            print(f"Game Key: {self.saveload.generate_key()}. Save it securely.")
-        else:
-            print("Not a valid option.")
+            overwrite_saved = input().strip().lower()
+            if overwrite_saved == "a":
+                self.write_game_key()
+            elif overwrite_saved == "b":
+                print(f"Game Key (if needed): {self.saveload.generate_key()}.")
+            else:
+                print("Not a valid option.")
             
     def start_game(self) -> None:
         if self.completed_intro == False:
@@ -913,7 +912,4 @@ class Update:
             self.update_high_scores()
             
             time.sleep(3)
-
-game = Game()
-update = game.update 
             
