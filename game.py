@@ -901,7 +901,7 @@ class Update:
 
     def update_share_dividend_yield(self) -> None:
         for share in self.game.shares:
-            self.game.shares[share]["dividend_yield"] = round(random.uniform(0, 0.05), 3)
+            self.game.shares[share]["dividend_yield"] = round(random.uniform(0, 0.05), 2)
 
     def update_game(self) -> None:
         while True:
