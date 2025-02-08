@@ -68,70 +68,60 @@ class Game:
             "a": {
                 "name": "Horizon Industries",
                 "price": 0,
-                "value": 0,
                 "dividend_yield": 0,
                 "amount": 0
             },
             "b": {
                 "name": "Summit Securities",
                 "price": 0,
-                "value": 0,
                 "dividend_yield": 0,
                 "amount": 0
             },
             "c": {
                 "name": "Crestline Holdings",
                 "price": 0,
-                "value": 0,
                 "dividend_yield": 0,
                 "amount": 0
             },
             "d": {
                 "name": "Cascade Ventures",
                 "price": 0,
-                "value": 0,
                 "dividend_yield": 0,
                 "amount": 0
             },
             "e": {
                 "name": "Panorama Industries",
                 "price": 0,
-                "value": 0,
                 "dividend_yield": 0,
                 "amount": 0
             },
             "f": {
                 "name": "Vanguard Corporation",
                 "price": 0,
-                "value": 0,
                 "dividend_yield": 0,
                 "amount": 0
             },
             "g": {
                 "name": "Apex Dynamics",
                 "price": 0,
-                "value": 0,
                 "dividend_yield": 0,
                 "amount": 0
             },
             "h": {   
                 "name": "Zenith Ventures",
                 "price": 0,
-                "value": 0,
                 "dividend_yield": 0,
                 "amount": 0
             },
             "i": {   
                 "name": "Crestview Holdings",
                 "price": 0,
-                "value": 0,
                 "dividend_yield": 0,
                 "amount": 0
             },
             "j": {   
                 "name": "Brick Corporation",
                 "price": 0,
-                "value": 0,
                 "dividend_yield": 0,
                 "amount": 0
             }
@@ -474,7 +464,7 @@ Enter the amount of shares you want to buy. To calculate the price, type in "cal
         if self.shares[alphic_shares_choice]["amount"] < shares_to_sell:
             print("Not enough shares to sell.")
             return
-        self.balance += self.shares[alphic_shares_choice]["value"] * shares_to_sell
+        self.balance += self.shares[alphic_shares_choice]["price"] * shares_to_sell
     
     def view_share_market(self) -> None:
         print(f"""{self.separator}
@@ -483,7 +473,6 @@ Share Market
         for share in self.shares:
             share_name: str = self.shares[share]["name"]
             print(f"""Price of one share in {share_name}: ${self.shares[share]['price']}
-Value of one share in {share_name}: ${self.shares[share]['value']}
 Dividend yield of {share_name}: {self.shares[share]["dividend_yield"] * 100}%
 {self.separator}""")
     
@@ -888,24 +877,19 @@ class Update:
             self.game.high_score = self.game.balance
             with open("game_info.txt", "w") as file:
                 file.write(str(self.game.high_score) + "\n")
-    
-    def update_share_values(self) -> None:
-        for share in self.game.shares:
-            self.game.shares[share]["value"] = random.randint(-500, 500)
 
     def update_share_prices(self) -> None:
         for share in self.game.shares:
-            self.game.shares[share]["price"] = self.game.shares[share]["value"] + random.randint(-250, 250)
+            self.game.shares[share]["price"] = random.randint(0, 150)
             if self.game.shares[share]["price"] < 1:
                 self.game.shares[share]["price"] = random.randint(0, abs(self.game.shares[share]["price"]))
 
     def update_share_dividend_yield(self) -> None:
         for share in self.game.shares:
-            self.game.shares[share]["dividend_yield"] = round(random.uniform(0, 0.05), 2)
+            self.game.shares[share]["dividend_yield"] = round(random.uniform(0, 0.05), 4)
 
     def update_game(self) -> None:
         while True:
-            self.update_share_values()
             self.update_share_prices()
             self.update_share_dividend_yield()
             self.update_inventory()
