@@ -26,7 +26,7 @@ class Game:
         self.saveload.game = self
         self.separator: str = '-' * 30
         self.bases: List[str] = []
-        self.redeemable: List[bool] = [True] * 5
+        self.redeemable: List[bool] = [True] * 3
         self.loans: List[int] = []
 
         self.empire_info: Dict[str, str] = {
@@ -779,11 +779,11 @@ b) Exit game""")
             else:
                 print("Unknown command.")
     def check_achievements(self) -> None:
-        if self.balance >= 2500 and self.redeemable[2]:
+        if self.balance >= 2500 and self.redeemable[1]:
             print("Achievement: $2500 earned! Passkey: ut6gp9s")
-        elif len(self.loans) > 0 and self.redeemable[3]:
+        elif len(self.loans) > 0 and self.redeemable[2]:
             print("Achievement: First loan! Passkey: po31u5b")
-        elif self.tanks + self.naval_cruisers + self.fighter_jets == 20 and self.redeemable[4]:
+        elif self.tanks + self.naval_cruisers + self.fighter_jets == 20 and self.redeemable[3]:
             print("Achievement: 20 vehicles! Passkey: 5rop05b")
         else:
             print("No achievements found.")
@@ -800,8 +800,6 @@ b) Exit game""")
             if passkey == "5rop05b" and self.naval_bases == 0:
                 print("No naval base available.")
                 return
-            reward[1]()
-            print(f"Redeemed prize of {reward[0]}.")
             self.redeemable[list(rewards.keys()).index(passkey) + 1] = False
         else:
             print("Invalid passkey.")
