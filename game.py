@@ -547,8 +547,10 @@ Dividend yield of {share_name}: {self.shares[share]["dividend_yield"] * 100}%
         try:
             with open("game_info.txt", "r") as file:
                 self.game_info = file.readlines()
-                if len(self.game_info) < 2:
+                if len(self.game_info) != 2:
                     any_saved_game: bool = False
+                else:
+                    any_saved_game: bool = True
         except FileNotFoundError:
             any_saved_game: bool = False
 
@@ -564,13 +566,15 @@ b) Save game in file""")
                 print("""You already have a saved game. Do you want to overwrite it?
 a) Yes
 b) No""")
-            overwrite_saved = input().strip().lower()
-            if overwrite_saved == "a":
-                self.write_game_key()
-            elif overwrite_saved == "b":
-                print(f"Game Key (if needed): {self.saveload.generate_key()}.")
+                overwrite_saved: str = input().strip().lower()
+                if overwrite_saved == "a":
+                    self.write_game_key()
+                elif overwrite_saved == "b":
+                    print(f"Game Key (if needed): {self.saveload.generate_key()}.")
+                else:
+                    print("Not a valid option.")
             else:
-                print("Not a valid option.")
+                self.write_game_key()
             
     def start_game(self) -> None:
         if self.completed_intro == False:
