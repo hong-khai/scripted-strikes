@@ -778,15 +778,10 @@ b) Exit game""")
                 continue
             else:
                 print("Unknown command.")
-
     def check_achievements(self) -> None:
-        if self.balance > int(self.high_score) and self.redeemable[1]:
-            with open("game_info.txt", "w") as file:
-                file.write(str(self.balance))
-            print("Achievement: Beaten high score! Passkey: t5m7pk8")
-        elif self.balance % 2500 == 0 and self.redeemable[2]:
+        if self.balance >= 2500 and self.redeemable[2]:
             print("Achievement: $2500 earned! Passkey: ut6gp9s")
-        elif len(self.loans) == 1 and self.redeemable[3]:
+        elif len(self.loans) > 0 and self.redeemable[3]:
             print("Achievement: First loan! Passkey: po31u5b")
         elif self.tanks + self.naval_cruisers + self.fighter_jets == 20 and self.redeemable[4]:
             print("Achievement: 20 vehicles! Passkey: 5rop05b")
@@ -796,16 +791,12 @@ b) Exit game""")
     def redeem_passkey(self) -> None:
         passkey = input("Enter passkey: ").strip()
         rewards = {
-            "t5m7pk8": ("2 tanks", lambda: setattr(self, 'tanks', self.tanks + 2)),
             "ut6gp9s": ("$500", lambda: setattr(self, 'balance', self.balance + 500)),
             "po31u5b": ("$250", lambda: setattr(self, 'balance', self.balance + 250)),
             "5rop05b": ("10 naval cruisers", lambda: setattr(self, 'naval_cruisers', self.naval_cruisers + 10))
         }
         reward = rewards.get(passkey)
         if reward:
-            if passkey == "t5m7pk8" and self.army_bases == 0:
-                print("No army base available.")
-                return
             if passkey == "5rop05b" and self.naval_bases == 0:
                 print("No naval base available.")
                 return
