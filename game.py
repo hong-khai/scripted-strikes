@@ -214,7 +214,7 @@ Air Force Bases: {self.air_force_bases}""")
         if alphic_aid_choice == "a":
             try:
                 aid_amount = int(input(f"How much money do you want to send to {empire_aiding}?"))
-                if aid_amount < 1:
+                if aid_amount <= 0:
                     print("Negative numbers and zero are not allowed.")
                     return
             except ValueError:
@@ -237,7 +237,7 @@ Air Force Bases: {self.air_force_bases}""")
             
             try:
                 amount_giving = int(input(f"How many {vehicle_aiding}s do you want to send to {empire_aiding}?"))
-                if amount_giving < 1:
+                if amount_giving <= 0:
                     print("Negative numbers and zero are not allowed.")
                     return
             except ValueError:
@@ -303,7 +303,7 @@ Do you want to defend or offend?""")
                 print("Invalid number.")
                 return
             
-            if amount_of_vehicles < 1:
+            if amount_of_vehicles <= 0:
                 print("Negative numbers and zero are not allowed.")
                 return
             
@@ -336,7 +336,7 @@ Do you want to defend or offend?""")
             self.vehicles_into_war.append(vehicle_type)
     
     def buy_vehicle(self, vehicle_type: str, number_needed: int) -> None:
-        if number_needed < 1:
+        if number_needed <= 0:
             print("Negative numbers and zero are not allowed.")
             return
 
@@ -392,7 +392,7 @@ Do you want to defend or offend?""")
         
         try:
             loan_paying = int(input("Which loan would you like to pay (enter Loan ID): "))
-            if loan_paying < 1:
+            if loan_paying <= 0:
                 print("Negative numbers and zero are not allowed.")
                 return
         except ValueError:
@@ -421,14 +421,14 @@ Enter the amount of shares you want to buy. To calculate the price, type in "cal
         if shares_choice == "calculator":
             try:
                 shares_to_calculate = int(input("Enter the amount of shares you want to calculate the price of: "))
-                if shares_to_calculate < 1:
+                if shares_to_calculate <= 0:
                     print("Negative numbers and zero are not allowed.")
                     return
             except ValueError:
                 print("Invalid number.")
                 return
 
-            if shares_to_calculate < 1:
+            if shares_to_calculate <= 0:
                 print("Negative numbers and zero are not allowed.")
                 return
 
@@ -454,7 +454,7 @@ Enter the amount of shares you want to buy. To calculate the price, type in "cal
     def sell_shares(self, alphic_shares_choice: str) -> None:
         try:
             shares_to_sell = int(input("Enter the amount of shares you want to sell: "))
-            if shares_to_sell < 1:
+            if shares_to_sell <= 0:
                 print("Negative numbers and zero are not allowed.")
                 return
         except ValueError:
@@ -720,7 +720,7 @@ b) Vehicle aid""")
             elif command == "/getloan":
                 try:
                     loan_needed = int(input("How much do you want to borrow? "))
-                    if number_needed < 1:
+                    if loan_needed <= 0:
                         print("Negative numbers and zero are not allowed.")
                         return
                 except ValueError:
